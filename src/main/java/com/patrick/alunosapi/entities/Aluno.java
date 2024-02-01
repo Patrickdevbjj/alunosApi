@@ -7,21 +7,25 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "tb_alunos")
-public class Alunos implements Serializable {
+public class Aluno implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
-    private Integer phoneNumber;
+    private String phoneNumber;
 
     private String email;
 
-    public Alunos() {
+    @ManyToOne
+    @JoinColumn(name = "professor_id")
+    private Professor professor;
+
+    public Aluno() {
     }
 
-    public Alunos(Long id, String name,  Integer phoneNumber, String email) {
+    public Aluno(Long id, String name, String phoneNumber, String email) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
@@ -44,11 +48,11 @@ public class Alunos implements Serializable {
         this.name = name;
     }
 
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -63,8 +67,8 @@ public class Alunos implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Alunos alunos)) return false;
-        return Objects.equals(id, alunos.id);
+        if (!(o instanceof Aluno aluno)) return false;
+        return Objects.equals(id, aluno.id);
     }
 
     @Override

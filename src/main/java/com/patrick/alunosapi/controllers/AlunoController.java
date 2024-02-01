@@ -1,12 +1,11 @@
 package com.patrick.alunosapi.controllers;
 
-import com.patrick.alunosapi.entities.Alunos;
+import com.patrick.alunosapi.entities.Aluno;
 import com.patrick.alunosapi.services.AlunoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,9 +17,17 @@ public class AlunoController {
     private AlunoService service;
 
     @GetMapping
-    public ResponseEntity<List<Alunos>> findAll() {
-        List<Alunos> list = service.findAll();
+    public ResponseEntity<List<Aluno>> findAll() {
+        List<Aluno> list = service.findAll();
         return ResponseEntity.ok().body(list);
     }
+
+
+    @PostMapping
+    public ResponseEntity<Aluno> salvarAluno(@RequestBody Aluno aluno) {
+        Aluno alunoSalvo = service.save(aluno);
+        return ResponseEntity.status(HttpStatus.CREATED).body(alunoSalvo);
+    }
+
 
 }

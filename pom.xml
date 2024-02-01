@@ -12,7 +12,7 @@
 	<artifactId>alunosapi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>alunosapi</name>
-	<description>Api de alunos</description>
+	<description>Api de aluno</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
