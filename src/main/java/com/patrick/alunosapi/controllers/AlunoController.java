@@ -2,9 +2,11 @@ package com.patrick.alunosapi.controllers;
 
 import com.patrick.alunosapi.entities.Aluno;
 import com.patrick.alunosapi.services.AlunoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +26,8 @@ public class AlunoController {
 
 
     @PostMapping
-    public ResponseEntity<Aluno> salvarAluno(@RequestBody Aluno aluno) {
+    @Validated
+    public ResponseEntity<Aluno> salvarAluno(@Valid @RequestBody Aluno aluno) {
         Aluno alunoSalvo = service.save(aluno);
         return ResponseEntity.status(HttpStatus.CREATED).body(alunoSalvo);
     }

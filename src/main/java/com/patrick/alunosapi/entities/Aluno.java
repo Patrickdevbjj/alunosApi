@@ -1,6 +1,9 @@
 package com.patrick.alunosapi.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -12,8 +15,13 @@ public class Aluno implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
+    @Size(min = 2, max = 50)
     private String name;
 
+    @NotNull
+    @Size(min = 9, max = 11)
     private String phoneNumber;
 
     private String email;

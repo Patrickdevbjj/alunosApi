@@ -27,7 +27,7 @@ public class AlunoService {
         return repository.save(aluno);
     }
 
-    public void  delete(Long id) {
+    /* public void  delete(Long id) {
         try {
             repository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
@@ -35,5 +35,18 @@ public class AlunoService {
         } catch (Exception e) {
             throw new RuntimeException("Erro ao excluir o aluno com o ID: " + id, e);
         }
+    } */
+
+    public void delete(Long id) {
+        try {
+            repository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new DataBaseException("Aluno não encontrado com o ID: " + id);
+        } catch (DataBaseException e) {
+            throw e; // Lança a DataBaseException sem modificação
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao excluir o aluno com o ID: " + id, e);
+        }
     }
+
 }
