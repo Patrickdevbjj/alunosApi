@@ -27,7 +27,7 @@ public class AlunoService {
         return repository.save(aluno);
     }
 
-    public void delete(Long id) {
+    public void  delete(Long id) {
         try {
             repository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
