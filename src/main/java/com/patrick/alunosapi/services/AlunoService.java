@@ -21,21 +21,20 @@ public class AlunoService {
         return repository.findAll();
     }
 
+    public Aluno findById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new DataBaseException("Aluno não encontrado com o ID: " + id));
+    }
+
+    public List<Aluno> findByName(String name) {
+        return repository.findByName(name);
+    }
 
     public Aluno save(Aluno aluno) {
         listaDeAlunos.add(aluno);
         return repository.save(aluno);
     }
 
-    /* public void  delete(Long id) {
-        try {
-            repository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {
-            throw new DataBaseException("Aluno não encontrado com o ID: " + id);
-        } catch (Exception e) {
-            throw new RuntimeException("Erro ao excluir o aluno com o ID: " + id, e);
-        }
-    } */
 
     public void delete(Long id) {
         try {
@@ -47,6 +46,16 @@ public class AlunoService {
         } catch (Exception e) {
             throw new RuntimeException("Erro ao excluir o aluno com o ID: " + id, e);
         }
+    }
+
+    public Aluno update(Long id, Aluno alunoAtualizado) {
+        Aluno alunoExistente = findById(id);
+        alunoExistente.setName(alunoAtualizado.getName());
+        alunoExistente.setPhoneNumber(alunoAtualizado.getPhoneNumber());
+        alunoExistente.setEmail(alunoAtualizado.getEmail());
+        alunoExistente.setFaixa(alunoAtualizado.getFaixa());
+        alunoExistente.setIdade(alunoAtualizado.getIdade());
+        return save(alunoExistente);
     }
 
 }

@@ -1,8 +1,7 @@
 package com.patrick.alunosapi.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+
 
 
 import java.io.Serializable;
@@ -16,15 +15,19 @@ public class Aluno implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @Size(min = 2, max = 50)
     private String name;
 
-    @NotNull
-    @Size(min = 9, max = 11)
+
     private String phoneNumber;
 
     private String email;
+
+
+    private Integer idade;
+
+
+    private String faixa;
+
 
     @ManyToOne
     @JoinColumn(name = "professor_id")
@@ -33,11 +36,13 @@ public class Aluno implements Serializable {
     public Aluno() {
     }
 
-    public Aluno(Long id, String name, String phoneNumber, String email) {
+    public Aluno(Long id, String name, String phoneNumber, String email, Integer idade, String faixa) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.idade = idade;
+        this.faixa = faixa;
     }
 
     public Long getId() {
@@ -72,6 +77,23 @@ public class Aluno implements Serializable {
         this.email = email;
     }
 
+
+    public Integer getIdade() {
+        return idade;
+    }
+
+    public void setIdade(Integer idade) {
+        this.idade = idade;
+    }
+
+    public String getFaixa() {
+        return faixa;
+    }
+
+    public void setFaixa(String faixa) {
+        this.faixa = faixa;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -83,4 +105,6 @@ public class Aluno implements Serializable {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+
 }
